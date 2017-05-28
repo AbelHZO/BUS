@@ -13,5 +13,7 @@
 	
 	<import resource="classpath:api-ws-clients-config/users-ws-service.xml"/>
 	<import resource="classpath:api-ws-clients-config/roles-ws-service.xml"/>
+	
+	<import resource="classpath:spring/integration/gateway-users.xml"/>
 
 </beans>

@@ -1,12 +1,16 @@
 package com.abelhzo.bus.soap.orchestrate;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.abelhzo.bus.soap.factory.ServicesFactory;
+import com.abelhzo.bus.soap.gateway.RolesGateway;
 import com.abelhzo.bus.soap.jaxws.CommonHeader;
 import com.abelhzo.bus.soap.orchestrate.service.UsersManagementOrchestrateService;
 import com.abelhzo.client.bus.commons.ConfigJAX;
 import com.abelhzo.client.bus.commons.ResponseWrapper;
+import com.abelhzo.client.bus.roles.GetRolSOAP;
+import com.abelhzo.client.bus.roles.ListRolSOAP;
 import com.abelhzo.client.bus.roles.RolesAddRQ;
 import com.abelhzo.client.bus.roles.RolesServiceSOAP;
 import com.abelhzo.client.bus.roles.RolesUpdateRQ;
@@ -17,6 +21,9 @@ import com.abelhzo.client.bus.users.UserUpdateRQ;
 
 @Service
 public class UsersManagementOrchestrate implements UsersManagementOrchestrateService {
+
+	@Autowired
+	private RolesGateway rolesGateway;
 
 	@Override
 	public ResponseWrapper listUserOP(CommonHeader header) {
@@ -56,57 +63,66 @@ public class UsersManagementOrchestrate implements UsersManagementOrchestrateSer
 
 	@Override
 	public ResponseWrapper getRolOP(CommonHeader header, Long idrol) {
-		RolesServiceSOAP rolesServiceSOAP = ServicesFactory.getRolesService();
-		
+		// RolesServiceSOAP rolesServiceSOAP =
+		// ServicesFactory.getRolesService();
+
 		ConfigJAX configJAX = new ConfigJAX();
 		configJAX.setIduser(header.getIduser());
 		configJAX.setIp(header.getIp());
 		configJAX.setLanguage(header.getLanguage());
-		
-		ResponseWrapper response = (ResponseWrapper) rolesServiceSOAP.getRolSOAP(configJAX, idrol);
-		
+
+		GetRolSOAP getRolSoap = new GetRolSOAP();
+		getRolSoap.setConfigJAX(configJAX);
+		getRolSoap.setIdrol(idrol);
+
+		ResponseWrapper response = rolesGateway.getRolOP(getRolSoap).getRolRS();
+
 		return response;
 	}
 
 	@Override
 	public ResponseWrapper listRolOP(CommonHeader header) {
-		RolesServiceSOAP rolesServiceSOAP = ServicesFactory.getRolesService(); 
-		
+		// RolesServiceSOAP rolesServiceSOAP =
+		// ServicesFactory.getRolesService();
+
 		ConfigJAX configJAX = new ConfigJAX();
 		configJAX.setIduser(header.getIduser());
 		configJAX.setIp(header.getIp());
 		configJAX.setLanguage(header.getLanguage());
-		
-		ResponseWrapper response = (ResponseWrapper) rolesServiceSOAP.listRolSOAP(configJAX);
-		
+
+		ListRolSOAP listRolSoap = new ListRolSOAP();
+		listRolSoap.setConfigJAX(configJAX);
+
+		ResponseWrapper response = rolesGateway.listRolOP(listRolSoap).getRolRS();
+
 		return response;
 	}
 
 	@Override
 	public ResponseWrapper saveRolOP(CommonHeader header, RolesAddRQ rq) {
-		RolesServiceSOAP rolesServiceSOAP = ServicesFactory.getRolesService(); 
-		
+		RolesServiceSOAP rolesServiceSOAP = ServicesFactory.getRolesService();
+
 		ConfigJAX configJAX = new ConfigJAX();
 		configJAX.setIduser(header.getIduser());
 		configJAX.setIp(header.getIp());
 		configJAX.setLanguage(header.getLanguage());
-		
+
 		ResponseWrapper response = (ResponseWrapper) rolesServiceSOAP.saveRolSOAP(configJAX, rq);
-		
+
 		return response;
 	}
 
 	@Override
 	public ResponseWrapper updateRolOP(CommonHeader header, RolesUpdateRQ rq) {
 		RolesServiceSOAP rolesServiceSOAP = ServicesFactory.getRolesService();
-		
+
 		ConfigJAX configJAX = new ConfigJAX();
 		configJAX.setIduser(header.getIduser());
 		configJAX.setIp(header.getIp());
 		configJAX.setLanguage(header.getLanguage());
-		
+
 		ResponseWrapper response = (ResponseWrapper) rolesServiceSOAP.updateRolSOAP(configJAX, rq);
-		
+
 		return response;
 	}
 
