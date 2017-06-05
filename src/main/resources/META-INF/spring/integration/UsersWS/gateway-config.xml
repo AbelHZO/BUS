@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.3.xsd">
+
+	<int:gateway
+		id="usersGateway"
+		default-request-channel="requestChannelDefault"
+		default-reply-channel="responseChannelDefault"
+		service-interface="com.abelhzo.bus.soap.gateway.UsersGateway">
+		
+		<int:method name="saveUserOP" request-channel="requestSaveUserChannel" reply-channel="responseSaveUserChannel" />		
+		<int:method name="updateUserOP" request-channel="requestUpdateUserChannel" reply-channel="responseUpdateUserChannel" />
+		<int:method name="getUserOP" request-channel="requestGetUserChannel" reply-channel="responseGetUserChannel" />
+		<int:method name="listUserOP" request-channel="requestListUserChannel" reply-channel="responseListUserChannel" />
+		<int:method name="loginUserOP" request-channel="requestLoginUserChannel" reply-channel="responseLoginUserChannel" />
+		<int:method name="logoutUserOP" request-channel="requestLogoutUserChannel" reply-channel="responseLogoutUserChannel" />
+		
+	</int:gateway>
+
+</beans>

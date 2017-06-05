@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-ws="http://www.springframework.org/schema/integration/ws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.3.xsd
+		http://www.springframework.org/schema/integration/ws http://www.springframework.org/schema/integration/ws/spring-integration-ws-4.3.xsd">
+
+	<int:chain input-channel="requestSaveRolChannel" output-channel="responseSaveRolChannel">
+		<int-ws:outbound-gateway
+			id="wsSaveRolGateway" 
+			uri="http://localhost:8085/UsersManagementSOAP/RolesServiceSOAP" 
+			marshaller="clientsMarshaller" unmarshaller="clientsMarshaller" />
+			
+		<int:transformer ref="rolesTransformer" method="responseSaveRol" />	
+	</int:chain>
+	
+	<int:chain input-channel="requestUpdateRolChannel" output-channel="responseUpdateRolChannel">
+		<int-ws:outbound-gateway
+			id="wsUpdateRolGateway" 
+			uri="http://localhost:8085/UsersManagementSOAP/RolesServiceSOAP" 
+			marshaller="clientsMarshaller" unmarshaller="clientsMarshaller" />
+			
+		<int:transformer ref="rolesTransformer" method="responseUpdateRol" />	
+	</int:chain>
+
+	<int:chain input-channel="requestGetRolChannel" output-channel="responseGetRolChannel">
+		<int-ws:outbound-gateway
+			id="wsGetRolGateway" 
+			uri="http://localhost:8085/UsersManagementSOAP/RolesServiceSOAP" 
+			marshaller="clientsMarshaller" unmarshaller="clientsMarshaller" />
+			
+		<int:transformer ref="rolesTransformer" method="responseGetRol" />	
+	</int:chain>
+
+	<int:chain input-channel="requestListRolChannel" output-channel="responseListRolChannel">
+		<int-ws:outbound-gateway
+			id="wsListRolGateway" 
+			uri="http://localhost:8085/UsersManagementSOAP/RolesServiceSOAP" 
+			marshaller="clientsMarshaller" unmarshaller="clientsMarshaller" />
+			
+		<int:transformer ref="rolesTransformer" method="responseListRol" />	
+	</int:chain>
+
+</beans>

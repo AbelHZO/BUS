@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.3.xsd">
+
+	<int:channel id="requestChannelDefault" />
+	<int:channel id="responseChannelDefault" />
+	
+	<int:channel id="requestSaveUserChannel" />
+	<int:channel id="responseSaveUserChannel" />
+	
+	<int:channel id="requestUpdateUserChannel" />
+	<int:channel id="responseUpdateUserChannel" />	
+	
+	<int:channel id="requestGetUserChannel" />
+	<int:channel id="responseGetUserChannel" />
+	
+	<int:channel id="requestListUserChannel" />
+	<int:channel id="responseListUserChannel" />
+
+	<int:channel id="requestLoginUserChannel" />
+	<int:channel id="responseLoginUserChannel" />
+	
+	<int:channel id="requestLogoutUserChannel" />
+	<int:channel id="responseLogoutUserChannel" />	
+
+</beans>

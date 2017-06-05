@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-ws="http://www.springframework.org/schema/integration/ws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.3.xsd
+		http://www.springframework.org/schema/integration/ws http://www.springframework.org/schema/integration/ws/spring-integration-ws-4.3.xsd">
+
+	<int:chain input-channel="requestSaveUserChannel" output-channel="responseSaveUserChannel">
+		<int-ws:outbound-gateway
+			id="wsSaveUserGateway" 
+			uri="http://localhost:8085/UsersManagementSOAP/UsersServiceSOAP" 
+			marshaller="clientsMarshaller" unmarshaller="clientsMarshaller" />
+			
+		<int:transformer ref="usersTransformer" method="responseSaveUser" />	
+	</int:chain>
+	
+	<int:chain input-channel="requestUpdateUserChannel" output-channel="responseUpdateUserChannel">
+		<int-ws:outbound-gateway
+			id="wsUpdateUserGateway" 
+			uri="http://localhost:8085/UsersManagementSOAP/UsersServiceSOAP" 
+			marshaller="clientsMarshaller" unmarshaller="clientsMarshaller" />
+			
+		<int:transformer ref="usersTransformer" method="responseUpdateUser" />	
+	</int:chain>
+	
+	<int:chain input-channel="requestGetUserChannel" output-channel="responseGetUserChannel">
+		<int-ws:outbound-gateway
+			id="wsGetUserGateway" 
+			uri="http://localhost:8085/UsersManagementSOAP/UsersServiceSOAP" 
+			marshaller="clientsMarshaller" unmarshaller="clientsMarshaller" />
+			
+		<int:transformer ref="usersTransformer" method="responseGetUser" />	
+	</int:chain>
+	
+	<int:chain input-channel="requestListUserChannel" output-channel="responseListUserChannel">
+		<int-ws:outbound-gateway
+			id="wsListUserGateway" 
+			uri="http://localhost:8085/UsersManagementSOAP/UsersServiceSOAP" 
+			marshaller="clientsMarshaller" unmarshaller="clientsMarshaller" />
+			
+		<int:transformer ref="usersTransformer" method="responseListUser" />	
+	</int:chain>
+	
+	<int:chain input-channel="requestLoginUserChannel" output-channel="responseLoginUserChannel">
+		<int-ws:outbound-gateway
+			id="wsLoginUserGateway" 
+			uri="http://localhost:8085/UsersManagementSOAP/UsersServiceSOAP" 
+			marshaller="clientsMarshaller" unmarshaller="clientsMarshaller" />
+			
+		<int:transformer ref="usersTransformer" method="responseLoginUser" />	
+	</int:chain>
+	
+	<int:chain input-channel="requestLogoutUserChannel" output-channel="responseLogoutUserChannel">
+		<int-ws:outbound-gateway
+			id="wsLogoutUserGateway" 
+			uri="http://localhost:8085/UsersManagementSOAP/UsersServiceSOAP" 
+			marshaller="clientsMarshaller" unmarshaller="clientsMarshaller" />
+			
+		<int:transformer ref="usersTransformer" method="responseLogoutUser" />	
+	</int:chain>				
+
+</beans>

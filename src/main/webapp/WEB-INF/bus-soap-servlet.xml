@@ -10,10 +10,14 @@
 	<context:annotation-config />
 	
 	<context:component-scan base-package="com.abelhzo.bus.soap.orchestrate" />
+	<context:component-scan base-package="com.abelhzo.bus.soap.activator"/>
+	<context:component-scan base-package="com.abelhzo.bus.soap.gateway" />
+	<context:component-scan base-package="com.abelhzo.bus.soap.transformer" />
 	
-	<import resource="classpath:api-ws-clients-config/users-ws-service.xml"/>
-	<import resource="classpath:api-ws-clients-config/roles-ws-service.xml"/>
 	
-	<import resource="classpath:spring/integration/gateway-users.xml"/>
+<!-- 	<import resource="classpath:api-ws-clients-config/users-ws-service.xml"/> -->
+<!-- 	<import resource="classpath:api-ws-clients-config/roles-ws-service.xml"/> -->
+	
+	<import resource="classpath:META-INF/spring/integration/integration-context.xml"/>
 
 </beans>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.3.xsd">
+
+	<int:gateway
+		id="rolesGateway"
+		default-request-channel="requestChannelDefault"
+		default-reply-channel="responseChannelDefault"
+		service-interface="com.abelhzo.bus.soap.gateway.RolesGateway">
+		
+		<int:method name="saveRolOP" request-channel="requestSaveRolChannel" reply-channel="responseSaveRolChannel" />
+		<int:method name="updateRolOP" request-channel="requestUpdateRolChannel" reply-channel="responseUpdateRolChannel" />
+		<int:method name="getRolOP" request-channel="requestGetRolChannel" reply-channel="responseGetRolChannel" />		
+		<int:method name="listRolOP" request-channel="requestListRolChannel" reply-channel="responseListRolChannel" />
+
+	</int:gateway>
+
+</beans>
